@@ -1,13 +1,14 @@
+INGREDIENTS = 'ingredients'
 MENU = {
     "espresso": {
-        "ingredients": {
+        INGREDIENTS: {
             "water": 50,
             "coffee": 18
         },
         "cost": 1.5
     },
     "latte": {
-        "ingredients": {
+        INGREDIENTS: {
             "water": 200,
             "milk": 150,
             "coffee": 24
@@ -15,7 +16,7 @@ MENU = {
         "cost": 2.5
     },
     "cappuccino": {
-        "ingredients": {
+        INGREDIENTS: {
             "water": 250,
             "milk": 100,
             "coffee": 24
@@ -36,11 +37,19 @@ def print_resources(money):
     print(f"Coffee: {resources.get('coffee')}g")
     print(f"Money: ${'{:0,.2f}'.format(money)}")
 
-# Step 1: Choose from 3 flavors or type 'report' for resource report
-# Step 2: Coin Operated
-# Step 3:
+def check_resources(choice):
+    global INGREDIENTS
+    drink = MENU.get(choice).get(INGREDIENTS)
+    for key in drink:
+        if resources[key] < drink[key]:
+            return key
+    return None
+def get_price(choice):
+    return MENU.get(choice).get('cost')
 
-# Print report resources left
-# Make sure you have enough resources for a new drink
-# Operate coins
-# Check tranaction successful
+def make_drink(choice):
+    global INGREDIENTS
+    drink = MENU.get(choice).get(INGREDIENTS)
+    for key in drink:
+        resources[key] -= drink[key]
+    print(f'Here is your {choice} ☕ Enjoy!')
