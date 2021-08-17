@@ -30,7 +30,7 @@ while len(answer_list) < 50:
                 missing.append(state)
         output = pandas.DataFrame(missing)
         output.columns = ['state']
-        output.to_csv('./missed_states.py')
+        output.to_csv('./missed_states.csv')
         break
     if answer_state in states_csv['state'].to_list() and answer_state not in answer_list:
         next_loc = states_csv[states_csv['state'] == answer_state]
