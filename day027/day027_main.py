@@ -10,11 +10,13 @@ my_label.pack()
 
 #Button
 def button_clicked():
-    my_label['text'] = 'Button got clicked.'
+    my_label['text'] = input.get()
 my_btn = tkinter.Button(text='Click me!', command=button_clicked)
 my_btn.pack()
 
 #Entry
+input = tkinter.Entry(width=10)
+input.pack()
 
 
 
