@@ -1,4 +1,5 @@
 import tkinter
+import math
 # colorhunt.co is a good website to get color palettes #
 # ---------------------------- CONSTANTS ------------------------------- #
 PINK = "#e2979c"
@@ -10,22 +11,35 @@ WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 CHECK = '✔'
-
+reps = 0
 # ---------------------------- TIMER RESET ------------------------------- # 
 
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 
-def start_timer():
-    window.after(1000, count_down, 10)
 
+def start_timer():
+    global reps
+    reps += 1
+    if reps in (1, 3, 5, 7):
+        # count_down(WORK_MIN * 60)
+        count_down(15)
+    elif reps in (2, 4, 6):
+        count_down(SHORT_BREAK_MIN * 60)
+    else:
+        count_down(LONG_BREAK_MIN * 60)
+        reps = 0
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
-import time
-# time.
+
 
 def count_down(duration):
-    canvas.itemconfig(timer_text, text=duration)
+    display_time = str(math.trunc(duration / 60)).zfill(2) + ':' + str(duration % 60).zfill(2)
+    canvas.itemconfig(timer_text, text=display_time)
     if duration > 0:
         window.after(1000, count_down, duration-1)
+    else:
+        print('')
+        start_timer()
+        # TODO: write check
 
 
 # ---------------------------- UI SETUP ------------------------------- #
