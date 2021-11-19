@@ -22,9 +22,10 @@ def start_timer():
     reps += 1
     if reps in (1, 3, 5, 7):
         # count_down(WORK_MIN * 60)
-        count_down(15)
+        count_down(10)
     elif reps in (2, 4, 6):
-        count_down(SHORT_BREAK_MIN * 60)
+        # count_down(SHORT_BREAK_MIN * 60)
+        count_down(5)
     else:
         count_down(LONG_BREAK_MIN * 60)
         reps = 0
@@ -32,13 +33,16 @@ def start_timer():
 
 
 def count_down(duration):
+    global reps
     display_time = str(math.trunc(duration / 60)).zfill(2) + ':' + str(duration % 60).zfill(2)
     canvas.itemconfig(timer_text, text=display_time)
     if duration > 0:
         window.after(1000, count_down, duration-1)
     else:
         print('')
-        start_timer()
+        # if reps % 2 == 0:
+        #     print('what')
+        # start_timer()
         # TODO: write check
 
 
